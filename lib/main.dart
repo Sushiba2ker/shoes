@@ -5,6 +5,9 @@ import 'screens/favorites/favorites_screen.dart';
 import 'screens/bag/bag_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/splash/splash_screen.dart';
+import 'widgets/navigation_item.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'dart:ui';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const SplashScreen(), // Thay đổi từ MainScreen sang SplashScreen
+      home: const SplashScreen(),
     );
   }
 }
@@ -36,7 +39,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  
+
   final List<Widget> _screens = [
     const HomeScreen(),
     const ShopScreen(),
@@ -50,51 +53,73 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        margin: const EdgeInsets.only(
+          bottom: 20,
+          left: 24,
+          right: 24,
+        ),
         decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+              spreadRadius: 0,
+            ),
+            BoxShadow(
+              color: const Color(0xFF0D6EFD).withOpacity(0.05),
+              blurRadius: 20,
               offset: const Offset(0, -5),
+              spreadRadius: 0,
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          elevation: 0,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          selectedFontSize: 12,
-          unselectedFontSize: 12,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(_selectedIndex == 0 ? Icons.home : Icons.home_outlined),
-              label: 'Home',
+        child: SafeArea(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  NavigationItem(
+                    icon: HugeIcons.strokeRoundedHome01,
+                    label: '',
+                    isSelected: _selectedIndex == 0,
+                    onTap: () => setState(() => _selectedIndex = 0),
+                  ),
+                  NavigationItem(
+                    icon: HugeIcons.strokeRoundedStore01,
+                    label: '',
+                    isSelected: _selectedIndex == 1,
+                    onTap: () => setState(() => _selectedIndex = 1),
+                  ),
+                  NavigationItem(
+                    icon: HugeIcons.strokeRoundedStar,
+                    label: '',
+                    isSelected: _selectedIndex == 2,
+                    onTap: () => setState(() => _selectedIndex = 2),
+                  ),
+                  NavigationItem(
+                    icon: HugeIcons.strokeRoundedShoppingBag03,
+                    label: '',
+                    isSelected: _selectedIndex == 3,
+                    onTap: () => setState(() => _selectedIndex = 3),
+                  ),
+                  NavigationItem(
+                    icon: HugeIcons.strokeRoundedUser,
+                    label: '',
+                    isSelected: _selectedIndex == 4,
+                    onTap: () => setState(() => _selectedIndex = 4),
+                  ),
+                ],
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(_selectedIndex == 1 ? Icons.search : Icons.search_outlined),
-              label: 'Shop',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(_selectedIndex == 2 ? Icons.favorite : Icons.favorite_border),
-              label: 'Favorites',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(_selectedIndex == 3 ? Icons.shopping_bag : Icons.shopping_bag_outlined),
-              label: 'Bag',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(_selectedIndex == 4 ? Icons.person : Icons.person_outline),
-              label: 'Profile',
-            ),
-          ],
+          ),
         ),
       ),
     );
