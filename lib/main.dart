@@ -53,71 +53,53 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        margin: const EdgeInsets.only(
-          bottom: 20,
-          left: 24,
-          right: 24,
-        ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 30,
-              offset: const Offset(0, 10),
-              spreadRadius: 0,
-            ),
-            BoxShadow(
-              color: const Color(0xFF0D6EFD).withOpacity(0.05),
-              blurRadius: 20,
-              offset: const Offset(0, -5),
-              spreadRadius: 0,
+              blurRadius: 10,
+              offset: const Offset(0, -2),
             ),
           ],
         ),
         child: SafeArea(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  NavigationItem(
-                    icon: HugeIcons.strokeRoundedHome01,
-                    label: '',
-                    isSelected: _selectedIndex == 0,
-                    onTap: () => setState(() => _selectedIndex = 0),
-                  ),
-                  NavigationItem(
-                    icon: HugeIcons.strokeRoundedStore01,
-                    label: '',
-                    isSelected: _selectedIndex == 1,
-                    onTap: () => setState(() => _selectedIndex = 1),
-                  ),
-                  NavigationItem(
-                    icon: HugeIcons.strokeRoundedStar,
-                    label: '',
-                    isSelected: _selectedIndex == 2,
-                    onTap: () => setState(() => _selectedIndex = 2),
-                  ),
-                  NavigationItem(
-                    icon: HugeIcons.strokeRoundedShoppingBag03,
-                    label: '',
-                    isSelected: _selectedIndex == 3,
-                    onTap: () => setState(() => _selectedIndex = 3),
-                  ),
-                  NavigationItem(
-                    icon: HugeIcons.strokeRoundedUser,
-                    label: '',
-                    isSelected: _selectedIndex == 4,
-                    onTap: () => setState(() => _selectedIndex = 4),
-                  ),
-                ],
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                NavigationItem(
+                  icon: HugeIcons.strokeRoundedHome11,
+                  label: 'Home',
+                  isSelected: _selectedIndex == 0,
+                  onTap: () => setState(() => _selectedIndex = 0),
+                ),
+                NavigationItem(
+                  icon: HugeIcons.strokeRoundedSearch01,
+                  label: 'Shop',
+                  isSelected: _selectedIndex == 1,
+                  onTap: () => setState(() => _selectedIndex = 1),
+                ),
+                NavigationItem(
+                  icon: HugeIcons.strokeRoundedFavourite,
+                  label: 'Favourites',
+                  isSelected: _selectedIndex == 2,
+                  onTap: () => setState(() => _selectedIndex = 2),
+                ),
+                NavigationItem(
+                  icon: HugeIcons.strokeRoundedShoppingBag03,
+                  label: 'Bag',
+                  isSelected: _selectedIndex == 3,
+                  onTap: () => setState(() => _selectedIndex = 3),
+                ),
+                NavigationItem(
+                  icon: HugeIcons.strokeRoundedUser,
+                  label: 'Profile',
+                  isSelected: _selectedIndex == 4,
+                  onTap: () => setState(() => _selectedIndex = 4),
+                ),
+              ],
             ),
           ),
         ),
